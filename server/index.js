@@ -1,10 +1,18 @@
+/**
+ * Importamos los paquetes y lo instanciamos en una variable
+ */
 const express = require('express')
 const app = express()
 const http = require('http')
 const cors = require('cors')
 const { Server } = require("socket.io")
-
 app.use(cors());
+/**
+ * Creamos el server con http y instanciamos io
+ * con el server creado, opciones adicionales con los cors
+ */
+
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -12,6 +20,11 @@ const io = new Server(server, {
     methods: ["GET", "POST"]
   }
 })
+/**
+ * Esuchamos nuestro socket.io
+ * 
+ */
+
 
 io.on("connection", (socket) => {
   console.log("user connected", socket.id);
@@ -30,6 +43,6 @@ io.on("connection", (socket) => {
   })
 })
 
-server.listen(3001, () => {
+server.listen(3001, function servidorEscuchando() {
   console.log("SERVER RUNNING");
 })
